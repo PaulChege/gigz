@@ -11,7 +11,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Dingo\Api\Http\Response;
-class AuthController extends Controller
+class AuthController extends BaseController
 {
 
 
@@ -38,9 +38,12 @@ class AuthController extends Controller
     public function attemptLogin(Request $request){
         if($this->login($request))
         {
-            return Response::make(["message"=>"Successfull login"]);
+            return $this->response->error('Success', 200);
         }
-        return Response::make(["message"=>"Invalid credentials"]);
+        return $this->response->error('Invalid credentials', 404);
+
+
+
 
     }
 }
